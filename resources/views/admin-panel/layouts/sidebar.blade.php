@@ -22,7 +22,20 @@
                 {{-- <ul class="nav nav-treeview"> --}}
                 <li class="nav-item">
                     <a href="{{ route('dashboard') }}" class="nav-link">
-                        <i class="nav-icon bi bi-circle"></i>
+                        <i class="nav-icon bi bi-speedometer2"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <hr class="my-0">
+                <li class="nav-item">
+                    <a href="{{ route('profile') }}" class="nav-link">
+                        <i class="nav-icon bi bi-clipboard-data"></i>
+                        <p>Profile</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('presensi') }}" class="nav-link">
+                        <i class="nav-icon bi bi-person-circle"></i>
                         <p>Presensi</p>
                     </a>
                 </li>

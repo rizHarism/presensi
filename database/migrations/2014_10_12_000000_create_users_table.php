@@ -17,10 +17,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('username')->unique();
             $table->string('gender');
-            $table->string('jabatan');
-            $table->string('no_hp');
+            $table->string('position');
+            $table->string('phone');
             $table->string('avatar');
-            $table->foreignId('departmen_id');
+            $table->string('role');
+            $table->foreignId('departement_id');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

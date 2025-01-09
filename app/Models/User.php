@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Models\Presensi\Presensi;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -20,6 +22,12 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'username',
+        'gender',
+        'position',
+        'phone',
+        'avatar',
+        'departement_id',
         'password',
     ];
 
@@ -42,4 +50,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function departemen()
+    {
+        return $this->belongsTo(Departemen::class, 'departement_id', 'id');
+    }
+
+    public function presensi()
+    {
+        return $this->hasMany(Presensi::class, 'user_id', 'id');
+    }
 }

@@ -31,21 +31,25 @@
         radius: 90
     }).addTo(map);
 
+    let userMarker, dist, isInside
+
     function locateUser() {
         let userLocation = map.locate({
-            // setView: true,
             enableHighAccuracy: true
         });
 
         map.on('locationfound', function(ev) {
-            let userMarker = L.marker([-8.098779268610004, 112.1833326255437]);
+            // userMarker = L.marker(ev.latlng);
+            userMarker = L.marker([-8.098779268610004, 112.1833326255437]);
             // let userMarker = L.marker(ev.latlng);
             console.log(userMarker)
             userMarker.addTo(map)
             map.flyTo(userMarker._latlng, 17)
-            // map.setView(userMarker._latlng, 17, {
-            //     animate: true
-            // })
+            dist = map.distance(userMarker._latlng, circle.getLatLng());
+            isInside = dist < circle.getRadius();
+            circle.setStyle({
+                fillColor: isInside ? 'green' : '#f03'
+            })
         })
     }
 
@@ -53,5 +57,14 @@
 
     $(".calibrate-position").on("click", function() {
         locateUser()
+    })
+
+    // post data check in
+    $(".checkin").on("click", function() {
+        if (isInside) {
+            alert('dalam area')
+        } else {
+            alert('diluar area')
+        }
     })
 </script>

@@ -17,19 +17,27 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     if (Auth::user()) {
-        return view('admin-panel.presensi.index');
+        if (Auth::user()->role == "admin") {
+            return view('admin-panel.dashboard.index');
+        } else {
+            return redirect()->route('profile');
+        }
     }
     return view('auth.login');
-});
+})->name('dashboard');
+
+Route::get('/profile', function () {
+    return view('admin-panel.profile.index');
+})->middleware(['auth', 'verified'])->name('profile');
 
 Route::get('/presensi', function () {
     return view('admin-panel.presensi.index');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('presensi');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
 
 require __DIR__ . '/auth.php';
