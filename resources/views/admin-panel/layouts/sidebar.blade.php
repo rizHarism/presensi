@@ -27,18 +27,44 @@
                     </a>
                 </li>
                 <hr class="my-0">
+                <li class="nav-header">Personal Data</li>
                 <li class="nav-item">
                     <a href="{{ route('profile') }}" class="nav-link">
-                        <i class="nav-icon bi bi-clipboard-data"></i>
+                        <i class="nav-icon bi-person-circle"></i>
                         <p>Profile</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('presensi') }}" class="nav-link">
-                        <i class="nav-icon bi bi-person-circle"></i>
-                        <p>Presensi</p>
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon bi bi-file-earmark-text"></i>
+                        <p>
+                            Data Presensi
+                            <i class="nav-arrow bi bi-chevron-right"></i>
+                        </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item ms-3">
+                            <a href="{{ route('presensi') }}" class="nav-link">
+                                <i class="nav-icon bi bi-file-check"></i>
+                                <p>Presensi</p>
+                            </a>
+                        </li>
+                        <li class="nav-item ms-3">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon bi bi-file-earmark-diff"></i>
+                                <p>Perizinan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item ms-3">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon bi bi-clock-history"></i>
+                                <p>Riwayat</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
+                <hr class="my-0">
+                <li class="nav-header">Administrator</li>
             </ul>
             <!--end::Sidebar Menu-->
         </nav>

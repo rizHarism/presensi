@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Departemen;
 use App\Models\User;
+use Database\Seeders\Presensi\GeneralSettingSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,21 +19,25 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         User::create([
-            'name' => 'TestUser',
-            'email' => 'test@mail.com',
-            'username' => 'test',
+            'name' => 'Rizqi Harisma',
+            'email' => 'Admin@mail.com',
+            'username' => 'Administrator',
             'gender' => "Laki-laki",
-            'position' => "Administrator",
+            'position' => "Staff IT",
             'phone' => '0812345678',
             'avatar' => 'avatar-default',
             'departement_id' => 1,
-            'role' => "admin",
+            'role' => "Administrator",
             'password' => bcrypt('password'),
         ]);
 
         Departemen::create([
             'name' => 'Manajemen Information And Technical',
             'code' => '0.1',
+        ]);
+
+        $this->call([
+            GeneralSettingSeeder::class
         ]);
     }
 }

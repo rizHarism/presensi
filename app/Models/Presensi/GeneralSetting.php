@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class GeneralSetting extends Model
 {
     use HasFactory;
+
+    public $fillable = [
+        'office',
+        'address',
+        'location',
+        'radius',
+        'time_in',
+        'time_out',
+        'tolerance_time',
+        'admin_id',
+    ];
 }

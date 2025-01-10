@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('image_out')->nullable();
             $table->string('location_in')->nullable();
             $table->string('location_out')->nullable();
+            $table->string('status_attendance');
             $table->boolean('approved');
             $table->string('information');
             $table->timestamps();

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Presensi\PresensiController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -26,13 +27,17 @@ Route::get('/', function () {
     return view('auth.login');
 })->name('dashboard');
 
-Route::get('/profile', function () {
-    return view('admin-panel.profile.index');
-})->middleware(['auth', 'verified'])->name('profile');
+Route::middleware('auth', 'verified')->group(function () {
+    // Route for presensi
+    Route::get('/presensi', [PresensiController::class, 'index'])->name('presensi');
+    Route::post('/presensi/store', [PresensiController::class, 'store'])->name('presensi.store');
 
-Route::get('/presensi', function () {
-    return view('admin-panel.presensi.index');
-})->middleware(['auth', 'verified'])->name('presensi');
+    // Route for profile
+    Route::get('/profile', function () {
+        return view('admin-panel.profile.index');
+    })->name('profile');
+});
+
 
 // Route::middleware('auth')->group(function () {
 //     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

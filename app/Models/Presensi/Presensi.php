@@ -18,6 +18,7 @@ class Presensi extends Model
         'image_out',
         'location_in',
         'location_out',
+        'status_attendance',
         'approved',
         'information',
     ];

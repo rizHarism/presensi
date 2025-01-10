@@ -2,14 +2,16 @@
     var urlw = window.location;
     $(document).ready(function() {
         // for sidebar menu entirely but not cover treeview
-        $('ul.nav-sidebar a').filter(function() {
+        $('ul.sidebar-menu a').filter(function() {
+
             return this.href == urlw;
         }).addClass('active');
 
         // for treeview
         $('ul.nav-treeview a').filter(function() {
             return this.href == urlw;
-        }).parentsUntil(".nav-sidebar > .nav-treeview").addClass('menu-open').prev('a').addClass('active');
+        }).parentsUntil("ul.sidebar-menu > .nav-treeview").addClass('menu-open').prev('a').addClass(
+            'active');
     })
 </script>
 
@@ -62,9 +64,97 @@
     // post data check in
     $(".checkin").on("click", function() {
         if (isInside) {
-            alert('dalam area')
+            let location = userMarker._latlng
+            let data = {
+                "location_in": location.lat + "," + location.lng,
+                "status_attendance": 'masuk',
+                "approved": 1,
+                "information": "tidak ada informasi",
+            }
+            let url = "{{ route('presensi.store') }}"
+            postDataPresensi(data, url)
         } else {
             alert('diluar area')
         }
     })
+
+    const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu"];
+    const months = [
+        "Januari", "February", "Maret", "April", "Mei", "June",
+        "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+    ];
+
+    function updateTime() {
+        const now = new Date(); // Get current date and time
+
+        // Format the date
+        const dayName = days[now.getDay()];
+        const monthName = months[now.getMonth()];
+        const day = String(now.getDate()).padStart(2, '0'); // Day of the month
+        const year = now.getFullYear(); // Full year
+
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+
+        // Ensure the element with id 'time' exists and update its content
+
+        $('#date').html(`${dayName}, ${day}/${monthName}/${year}`)
+        $('#time').html(`${hours}:${minutes}:${seconds}`)
+    }
+
+    // Update time every second
+    setInterval(updateTime, 1000);
+    // Initialize time display immediately
+    updateTime();
+
+
+    // check in button on click
+
+    function postDataPresensi(data, url) {
+        console.log(data)
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            },
+            type: 'POST',
+            url: url,
+            data: JSON.stringify(data),
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+            processData: false,
+            success: (data) => {
+
+            },
+            error: (xhr, ajaxOptions, thrownError) => {
+                if (xhr.responseJSON.hasOwnProperty('errors')) {
+                    var html =
+                        "<ul style=justify-content: space-between;'>";
+                    var txt = "";
+                    for (item in xhr.responseJSON.errors) {
+                        if (xhr.responseJSON.errors[item].length) {
+                            txt = xhr.responseJSON.errors[item];
+                            for (var i = 0; i < xhr.responseJSON.errors[item]
+                                .length; i++) {
+                                html += "<li class='dropdown-item'>" +
+                                    "<i class='fas fa-times' style='color: red;'></i> &nbsp&nbsp&nbsp&nbsp" +
+                                    xhr
+                                    .responseJSON
+                                    .errors[item][i] +
+                                    "</li>"
+                            }
+
+                        }
+                    }
+                    html += "</ul>";
+                    // swal.fire({
+                    //     title: 'Error',
+                    //     html: txt,
+                    //     icon: 'warning',
+                    // });
+
+                }
+            }
+        });
+    }
 </script>
