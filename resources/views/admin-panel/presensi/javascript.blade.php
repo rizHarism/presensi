@@ -124,7 +124,7 @@
             contentType: "application/json; charset=utf-8",
             processData: false,
             success: (data) => {
-
+                location.reload();
             },
             error: (xhr, ajaxOptions, thrownError) => {
                 if (xhr.responseJSON.hasOwnProperty('errors')) {
