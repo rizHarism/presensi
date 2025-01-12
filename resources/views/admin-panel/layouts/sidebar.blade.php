@@ -50,15 +50,15 @@
                             </a>
                         </li>
                         <li class="nav-item ms-3">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon bi bi-file-earmark-diff"></i>
-                                <p>Perizinan</p>
+                            <a href="{{ route('presensi.history') }}" class="nav-link">
+                                <i class="nav-icon bi bi-clock-history"></i>
+                                <p>Riwayat Presensi</p>
                             </a>
                         </li>
                         <li class="nav-item ms-3">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon bi bi-clock-history"></i>
-                                <p>Riwayat</p>
+                                <i class="nav-icon bi bi-file-earmark-diff"></i>
+                                <p>Perizinan</p>
                             </a>
                         </li>
                     </ul>

@@ -19,7 +19,8 @@
 </script>
 
 <script>
-    const map = L.map('map-presensi').setView([-8.098779268610004, 112.1833326255437], 17);
+    // const map = L.map('map-presensi').setView([-8.098779268610004, 112.1833326255437], 17);
+    const map = L.map('map-presensi').setView([-8.0516803, 112.335131], 17);
 
     const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
@@ -27,6 +28,7 @@
     }).addTo(map);
 
     var circle = L.circle([-8.098779268610004, 112.1833326255437], {
+        // var circle = L.circle([-8.0516803, 112.335131], {
         color: 'red',
         fillColor: 'red',
         fillOpacity: 0.4,
@@ -36,13 +38,16 @@
     let userMarker, dist, isInside
 
     function locateUser() {
+        // let userLocation = map.locate({
+        //     // enableHighAccuracy: true
+        // });
         let userLocation = map.locate({
-            enableHighAccuracy: true
+            // setView: true,
+            // maxZoom: 16
         });
 
         map.on('locationfound', function(ev) {
-            // userMarker = L.marker(ev.latlng);
-            userMarker = L.marker([-8.098779268610004, 112.1833326255437]);
+            userMarker = L.marker(ev.latlng);
             // let userMarker = L.marker(ev.latlng);
             console.log(userMarker)
             userMarker.addTo(map)
@@ -54,6 +59,13 @@
             })
         })
     }
+
+    function onLocationError(e) {
+        alert(e.message);
+    }
+
+
+    map.on('locationerror', onLocationError);
 
     locateUser()
 
@@ -72,10 +84,23 @@
                 "information": "tidak ada informasi",
             }
             let url = "{{ route('presensi.store') }}"
-            postDataPresensi(data, url)
+            postDataPresensi(JSON.stringify(data), url, "application/json")
         } else {
-            alert('diluar area')
+            $("#modal-outside-area").modal("show")
         }
+    })
+
+    // post data check in lapangan
+    $("#checkin-lapang").on("click", function() {
+        let location = userMarker._latlng
+        formData = new FormData();
+        formData.append("location_in", location.lat + "," + location.lng)
+        formData.append("status_attendance", "lapang")
+        formData.append("approved", 0)
+        formData.append("information", $("#informasi").val())
+        formData.append("image_in", $('input[type=file]')[0].files[0])
+        let url = "{{ route('presensi.store') }}"
+        postDataPresensi(formData, url, false)
     })
 
     const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu"];
@@ -111,7 +136,7 @@
 
     // check in button on click
 
-    function postDataPresensi(data, url) {
+    function postDataPresensi(data, url, contentType) {
         console.log(data)
         $.ajax({
             headers: {
@@ -119,12 +144,22 @@
             },
             type: 'POST',
             url: url,
-            data: JSON.stringify(data),
-            cache: false,
-            contentType: "application/json; charset=utf-8",
+            data: data,
+            // cache: false,
+            contentType: contentType,
             processData: false,
             success: (data) => {
-                location.reload();
+                swal.fire({
+                    title: 'Berhasil',
+                    text: "Prsensi Berhasil",
+                    icon: 'success',
+
+                }).then((result) => {
+                    console.log(result);
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                })
             },
             error: (xhr, ajaxOptions, thrownError) => {
                 if (xhr.responseJSON.hasOwnProperty('errors')) {

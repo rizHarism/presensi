@@ -30,12 +30,15 @@ Route::get('/', function () {
 Route::middleware('auth', 'verified')->group(function () {
     // Route for presensi
     Route::get('/presensi', [PresensiController::class, 'index'])->name('presensi');
+    Route::get('/presensi/history', [PresensiController::class, 'history'])->name('presensi.history');
+    Route::get('/presensi/history/dt', [PresensiController::class, 'datatables'])->name('presensi.datatables');
     Route::post('/presensi/store', [PresensiController::class, 'store'])->name('presensi.store');
 
     // Route for profile
-    Route::get('/profile', function () {
-        return view('admin-panel.profile.index');
-    })->name('profile');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    // Route::get('/profile', function () {
+    //     return view('admin-panel.profile.index');
+    // })->name('profile');
 });
 
 
