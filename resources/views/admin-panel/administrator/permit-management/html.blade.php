@@ -26,17 +26,17 @@
             <div class="card">
                 <h5 class="card-header fw-bold">Perizinan</h5>
                 <div class="card-body ">
-                    <button type="button" class="btn btn-primary" id="add-permit">+ Pengajuan Izin</button>
-                    <hr>
                     <table class="table table-striped" id="table-permit">
                         <thead>
                             <tr class="">
                                 <th> #</th>
+                                <th> Nama</th>
                                 <th> Tanggal Izin</th>
                                 <th> Lama Izin</th>
                                 <th> Foto</th>
                                 <th> Keterangan</th>
                                 <th> Status Approve</th>
+                                <th> Aksi</th>
                             </tr>
                         </thead>
                     </table>

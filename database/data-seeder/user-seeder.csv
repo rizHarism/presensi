@@ -1,0 +1,5 @@
+﻿id,name,email,username,gender,position,phone,avatar,departement,role,password
+1,Rizqi,admin@mail.com,Administrator,Laki-laki,Staff,85445412545,avatar-default.png,2,Administrator,password
+1,user1,user1@mail.com,user1,Laki-laki,Staff,85445412545,avatar-default.png,2,General User,password
+,user2,user2@mail.com,user2,Perempuan,Manajer,85445412545,avatar-default.png,3,General User,password
+,user3,user3@mail.com,user3,Perempuan,Staff,85445412545,avatar-default.png,3,General User,password

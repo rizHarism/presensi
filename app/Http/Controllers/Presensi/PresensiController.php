@@ -80,4 +80,33 @@ class PresensiController extends Controller
 
         return response("Data Presensi berhasil disimpan");
     }
+
+    public function update(Request $request)
+    {
+        $date_time = Carbon::now();
+        $date_time->setTimezone('Asia/Jakarta');
+        $image_in_name = null;
+        $presensi = Presensi::where('id', Auth::user()->id)
+            ->whereDate('check_in', $date_time->toDateString())
+            ->orderBy('created_at', 'desc')->first();
+        DB::beginTransaction();
+        if ($request->hasFile('image_in')) {
+            $image_in = $request->file('image_in');
+            $image_in_name = $image_in->hashName();
+            $image_in->storeAs('public/presensi/lapang', $image_in_name);
+        }
+        try {
+            $presensi->check_out = $date_time;
+            $presensi->location_out = $request->location_out;
+            $presensi->save();
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+            return response($th->getMessage(), 500);
+        }
+
+        return response("Data Presensi berhasil disimpan");
+    }
 }

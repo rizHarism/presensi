@@ -22,11 +22,14 @@
     table = $('#table-permit').DataTable({
         processing: true,
         ajax: {
-            url: "{{ route('permit.datatables') }}",
+            url: "{{ route('administrator.permits.datatables') }}",
             method: 'GET',
         },
         columns: [{
                 data: 'DT_RowIndex',
+            },
+            {
+                data: 'user.name',
             },
             {
                 data: 'apply_date',
@@ -56,6 +59,13 @@
                         return `<span class="badge bg-danger">Not Approved </span>`
                     }
 
+                }
+            },
+            {
+                data: 'id',
+                render: function(id) {
+                    return `<a class="btn btn-sm btn-warning">Detail</a>
+                    <a class="btn btn-sm btn-danger">Edit</a>`
                 }
             },
         ],
@@ -89,7 +99,8 @@
             contentType: false,
             processData: false,
             success: (data) => {
-                if (data = "duplicated") {
+                alert(data)
+                if (data == "duplicated") {
                     swal.fire({
                         title: 'Perhatian',
                         text: "Data Pengajuan Sudah ada",

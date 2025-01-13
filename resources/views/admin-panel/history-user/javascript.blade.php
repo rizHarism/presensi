@@ -44,6 +44,10 @@
             },
             {
                 data: 'check_out',
+                render: (data) => {
+                    const date = data.split(" ")
+                    return date[1]
+                }
             },
             {
                 data: 'status_attendance',

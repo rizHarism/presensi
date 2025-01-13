@@ -27,8 +27,8 @@
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
-    var circle = L.circle([-8.098779268610004, 112.1833326255437], {
-        // var circle = L.circle([-8.0516803, 112.335131], {
+    // var circle = L.circle([-8.098779268610004, 112.1833326255437], {
+    var circle = L.circle([-8.0516803, 112.335131], {
         color: 'red',
         fillColor: 'red',
         fillOpacity: 0.4,
@@ -84,10 +84,20 @@
                 "information": "tidak ada informasi",
             }
             let url = "{{ route('presensi.store') }}"
-            postDataPresensi(JSON.stringify(data), url, "application/json")
+            postDataPresensi(JSON.stringify(data), "POST", url, "application/json")
         } else {
             $("#modal-outside-area").modal("show")
         }
+    })
+
+    // post data check in
+    $(".checkout").on("click", function() {
+        let location = userMarker._latlng
+        let data = {
+            "location_out": location.lat + "," + location.lng,
+        }
+        let url = "{{ route('presensi.update') }}"
+        postDataPresensi(JSON.stringify(data), "PUT", url, "application/json")
     })
 
     // post data check in lapangan
@@ -100,7 +110,7 @@
         formData.append("information", $("#informasi").val())
         formData.append("image_in", $('input[type=file]')[0].files[0])
         let url = "{{ route('presensi.store') }}"
-        postDataPresensi(formData, url, false)
+        postDataPresensi(formData, "POST", url, false)
     })
 
     const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu"];
@@ -136,12 +146,12 @@
 
     // check in button on click
 
-    function postDataPresensi(data, url, contentType) {
+    function postDataPresensi(data, method, url, contentType) {
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}',
             },
-            type: 'POST',
+            type: method,
             url: url,
             data: data,
             // cache: false,

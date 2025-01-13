@@ -33,38 +33,38 @@ class PermitController extends Controller
     {
         // dd($request->all());
         $date = Carbon::now();
-        $check = Permit::where('apply_date', $date)->first();
-
+        $check = Permit::where('apply_date', $date->toDateString())->first();
+        // dd($check);
         if ($check) {
             return response("duplicated");
-        }
+        } else {
+            $date->setTimezone('Asia/Jakarta');
+            $photo = null;
+            DB::beginTransaction();
+            if ($request->hasFile('photo')) {
+                $photo = $request->file('photo');
+                $photo_name = $photo->hashName();
+                $photo->storeAs('public/permit/', $photo_name);
+            }
+            try {
+                Permit::create([
+                    'user_id' => Auth::user()->id,
+                    'admin_id' => null,
+                    'apply_date' => $date,
+                    'duration' => $request->duration,
+                    'information' => $request->information,
+                    'photo' => $photo_name,
+                    'approved' => null,
+                ]);
 
-        $date->setTimezone('Asia/Jakarta');
-        $photo = null;
-        DB::beginTransaction();
-        if ($request->hasFile('photo')) {
-            $photo = $request->file('photo');
-            $photo_name = $photo->hashName();
-            $photo->storeAs('public/permit/', $photo_name);
-        }
-        try {
-            Permit::create([
-                'user_id' => Auth::user()->id,
-                'admin_id' => null,
-                'apply_date' => $date,
-                'duration' => $request->duration,
-                'information' => $request->information,
-                'photo' => $photo_name,
-                'approved' => null,
-            ]);
+                DB::commit();
+            } catch (\Throwable $th) {
+                DB::rollBack();
+                throw $th;
+                return response($th->getMessage(), 500);
+            }
 
-            DB::commit();
-        } catch (\Throwable $th) {
-            DB::rollBack();
-            throw $th;
-            return response($th->getMessage(), 500);
+            return response("Data Presensi berhasil disimpan");
         }
-
-        return response("Data Presensi berhasil disimpan");
     }
 }

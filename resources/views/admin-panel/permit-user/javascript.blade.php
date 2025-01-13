@@ -89,7 +89,7 @@
             contentType: false,
             processData: false,
             success: (data) => {
-                if (data = "duplicated") {
+                if (data == "duplicated") {
                     swal.fire({
                         title: 'Perhatian',
                         text: "Data Pengajuan Sudah ada",

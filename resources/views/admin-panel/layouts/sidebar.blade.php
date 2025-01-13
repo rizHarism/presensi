@@ -82,7 +82,7 @@
                                 </a>
                             </li>
                             <li class="nav-item ms-3">
-                                <a href="#" class="nav-link">
+                                <a href="{{ route('administrator.permits.index') }}" class="nav-link">
                                     <i class="nav-icon bi bi-file-earmark-diff"></i>
                                     <p>Data Perizinan</p>
                                 </a>
