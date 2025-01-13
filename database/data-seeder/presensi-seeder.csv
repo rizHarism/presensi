@@ -1,0 +1,5 @@
+﻿id,user id,check in,checkout,imagein,imageout,locationin,location out,status attendance,approved,information
+1,1,2025-01-13 7:34:11,2025-01-13 17:34:11,,,"-8.0516803, 112.335131",,kantor,1,masuk
+1,2,2025-01-13 7:34:11,2025-01-13 17:34:11,,,"-8.0516803, 112.335132",,kantor,1,masuk
+,3,2025-01-13 7:34:11,2025-01-13 17:34:11,,,"-8.0516803, 112.335133",,kantor,1,masuk
+,4,2025-01-13 7:34:11,2025-01-13 17:34:11,,,"-8.0516803, 112.335134",,kantor,1,masuk

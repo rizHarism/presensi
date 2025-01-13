@@ -8,6 +8,7 @@ use App\Models\Departemen;
 use App\Models\User;
 use Database\Seeders\Presensi\DepartementSeeder;
 use Database\Seeders\Presensi\GeneralSettingSeeder;
+use Database\Seeders\Presensi\PresensiSeeder;
 use Database\Seeders\Presensi\UsersSeeder;
 use Illuminate\Database\Seeder;
 
@@ -41,7 +42,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             GeneralSettingSeeder::class,
             DepartementSeeder::class,
-            UsersSeeder::class
+            UsersSeeder::class,
+            PresensiSeeder::class,
         ]);
     }
 }

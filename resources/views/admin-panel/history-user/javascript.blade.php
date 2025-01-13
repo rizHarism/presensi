@@ -45,8 +45,12 @@
             {
                 data: 'check_out',
                 render: (data) => {
-                    const date = data.split(" ")
-                    return date[1]
+                    if (data) {
+                        const date = data.split(" ")
+                        return date[1]
+                    } else {
+                        return "-"
+                    }
                 }
             },
             {
