@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Presensi\PermitController;
 use App\Http\Controllers\Presensi\PresensiController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
@@ -33,6 +34,12 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::get('/presensi/history', [PresensiController::class, 'history'])->name('presensi.history');
     Route::get('/presensi/history/dt', [PresensiController::class, 'datatables'])->name('presensi.datatables');
     Route::post('/presensi/store', [PresensiController::class, 'store'])->name('presensi.store');
+
+    // Route for user permit
+    Route::get('/permit', [PermitController::class, 'index'])->name('permit.index');
+    Route::get('/permit/dt', [PermitController::class, 'datatables'])->name('permit.datatables');
+    Route::post('/permit/store', [PermitController::class, 'store'])->name('permit.store');
+
 
     // Route for profile
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');

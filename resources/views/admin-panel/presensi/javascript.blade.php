@@ -137,7 +137,6 @@
     // check in button on click
 
     function postDataPresensi(data, url, contentType) {
-        console.log(data)
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}',

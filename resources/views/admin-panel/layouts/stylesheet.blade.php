@@ -27,3 +27,13 @@
 {{-- datatables --}}
 {{-- <link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.bootstrap5.min.css" /> --}}
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+
+<style>
+    .row-yellow {
+        background-color: yellow !important;
+    }
+
+    .row-red {
+        background-color: red !important;
+    }
+</style>

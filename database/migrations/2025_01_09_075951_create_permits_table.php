@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('permits', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->foreignId('admin_id');
+            $table->foreignId('admin_id')->nullable();
             $table->date('apply_date');
             $table->integer('duration');
             $table->string('information');
             $table->string('photo');
-            $table->boolean('approved');
+            $table->boolean('approved')->nullable();
             $table->timestamps();
         });
     }

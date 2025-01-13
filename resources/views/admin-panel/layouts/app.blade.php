@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @yield('extra_stylesheet')
     @include('admin-panel.layouts.stylesheet')
+
 </head>
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">

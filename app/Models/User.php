@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Models\Presensi\Permit;
 use App\Models\Presensi\Presensi;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -59,5 +60,10 @@ class User extends Authenticatable
     public function presensi()
     {
         return $this->hasMany(Presensi::class, 'user_id', 'id');
+    }
+
+    public function permit()
+    {
+        return $this->hasMany(Permit::class, 'user_id', 'id');
     }
 }
