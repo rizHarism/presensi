@@ -19,13 +19,22 @@ class PresensiController extends Controller
         $date_time = Carbon::now();
         $date_time->setTimezone('Asia/Jakarta');
         $check_checkin = Presensi::where('user_id', Auth::user()->id)->whereDate('check_in', '=', $date_time)->first();
+        $check_out = $check_checkin->check_out;
+
         if ($check_checkin) {
             $status_checkin = true;
         } else {
             $status_checkin = false;
         };
+
+        if ($check_out) {
+            $status_checkout = true;
+        } else {
+            $status_checkout = false;
+        };
         return view('admin-panel.presensi.index', [
-            'check_in' => $status_checkin
+            'check_in' => $status_checkin,
+            'check_out' => $status_checkout
         ]);
     }
 

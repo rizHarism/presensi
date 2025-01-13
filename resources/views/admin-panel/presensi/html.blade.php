@@ -32,13 +32,19 @@
                         <h4 id="date"></h4>
                         <h4 id="time"></h4>
                         <h5 id="message"></h5>
-                        <p class="checkin-text">Silahkan Lakukan Presensi Hari Ini</p>
+                        {{-- <p class="checkin-text">Silahkan Lakukan Presensi Hari Ini</p> --}}
                         <input class="btn btn-primary calibrate-position" type="button" value="#">
                         @if ($check_in)
-                            <input class="btn btn-danger checkout" type="button" value="Check Out">
+
+                            @if ($check_out)
+                                <input class="btn btn-secondary " type="button" value="Done" disabled>
+                            @else
+                                <input class="btn btn-danger checkout" type="button" value="Check Out">
+                            @endif
                         @else
                             <input class="btn btn-primary checkin" type="button" value="Check In">
                         @endif
+
                     </div>
                 </div>
             </div>
