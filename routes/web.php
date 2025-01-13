@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Administrator\UserController;
+use App\Http\Controllers\Administrator\UserPresensisController;
 use App\Http\Controllers\Presensi\PermitController;
 use App\Http\Controllers\Presensi\PresensiController;
 use App\Http\Controllers\ProfileController;
@@ -40,9 +42,18 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::get('/permit/dt', [PermitController::class, 'datatables'])->name('permit.datatables');
     Route::post('/permit/store', [PermitController::class, 'store'])->name('permit.store');
 
-
     // Route for profile
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+
+    // Route for administrator role for users
+    Route::get('/administrator/users', [UserController::class, 'index'])->name('administrator.users.index');
+    Route::get('/administrator/users/datatables', [UserController::class, 'datatables'])->name('administrator.users.datatables');
+    Route::post('administrator/users/store', [UserController::class, 'store'])->name('administrator.users.store');
+
+    // Route for administrator role presensies
+    Route::get('/administrator/presensis', [UserPresensisController::class, 'index'])->name('administrator.presensis.index');
+    Route::get('/administrator/presensis/datatables', [UserPresensisController::class, 'datatables'])->name('administrator.presensis.datatables');
+    Route::post('administrator/presensis/store', [UserPresensisController::class, 'store'])->name('administrator.presensis.store');
     // Route::get('/profile', function () {
     //     return view('admin-panel.profile.index');
     // })->name('profile');

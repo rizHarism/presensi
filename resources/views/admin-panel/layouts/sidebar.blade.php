@@ -21,10 +21,10 @@
 
                 {{-- <ul class="nav nav-treeview"> --}}
                 <li class="nav-item">
-                    <a href="{{ route('dashboard') }}" class="nav-link">
+                    {{-- <a href="{{ route('dashboard') }}" class="nav-link">
                         <i class="nav-icon bi bi-speedometer2"></i>
                         <p>Dashboard</p>
-                    </a>
+                    </a> --}}
                 </li>
                 <hr class="my-0">
                 <li class="nav-header">Personal Data</li>
@@ -64,7 +64,38 @@
                     </ul>
                 </li>
                 <hr class="my-0">
-                <li class="nav-header">Administrator</li>
+                @if (Auth::user()->role == 'Administrator')
+                    <li class="nav-header">Administrator</li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon bi bi-file-earmark-text"></i>
+                            <p>
+                                Manajemen Presensi
+                                <i class="nav-arrow bi bi-chevron-right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item ms-3">
+                                <a href="{{ route('administrator.presensis.index') }}" class="nav-link">
+                                    <i class="nav-icon bi bi-file-check"></i>
+                                    <p>Data Presensi</p>
+                                </a>
+                            </li>
+                            <li class="nav-item ms-3">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon bi bi-file-earmark-diff"></i>
+                                    <p>Data Perizinan</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('administrator.users.index') }}" class="nav-link">
+                            <i class="nav-icon bi-person-circle"></i>
+                            <p>Manajemen Personil</p>
+                        </a>
+                    </li>
+                @endif
             </ul>
             <!--end::Sidebar Menu-->
         </nav>
