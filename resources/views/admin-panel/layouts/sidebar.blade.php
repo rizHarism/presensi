@@ -91,8 +91,15 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('administrator.users.index') }}" class="nav-link">
-                            <i class="nav-icon bi-person-circle"></i>
+                            <i class="nav-icon fa fa-users"></i>
                             <p>Manajemen Personil</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-gear"></i>
+                            <p>Pengaturan Umum</p>
                         </a>
                     </li>
                 @endif

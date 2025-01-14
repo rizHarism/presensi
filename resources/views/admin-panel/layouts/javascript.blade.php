@@ -24,9 +24,10 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 {{-- datatables --}}
-{{-- <script src="https://cdn.datatables.net/2.2.1/js/dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/2.2.1/js/dataTables.bootstrap5.min.js"></script> --}}
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+{{-- kit font awesome --}}
+<script src="https://kit.fontawesome.com/e4d20a5f83.js" crossorigin="anonymous"></script>
 
 <script>
     const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
